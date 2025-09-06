@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+
+  <link href="https://fonts.googleapis.com/css2?family=Braddon:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fake News Detector</title>
+  <link rel="icon" type="/static/png" href="/static/fake_concept.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Braddon:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-500">
+  <header
+    class="fixed top-0 left-0 w-full z-50 text-black-100 body-font py-2 md:py-4 bg-gradient-to-r from-black to-purple-900">
+    <div class="container mx-auto flex flex-wrap px-0 md:px-4 py-0 md:py-0 flex-col md:flex-row items-center">
+      <a href="#home" class="flex title-font font-medium items-center mb-4 md:mb-0 order-1 md:order-none">
+        <span
+          class="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 rounded-full shadow-lg">
+          <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="shieldGradient" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#34d399" />
+                <stop offset="0.5" stop-color="#3b82f6" />
+                <stop offset="1" stop-color="#a78bfa" />
+              </linearGradient>
+            </defs>
+            <path d="M24 4L8 10v10c0 12 8 20 16 24 8-4 16-12 16-24V10L24 4z" fill="url(#shieldGradient)" />
+            <path d="M18 25l5 5 7-9" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span
+          class="logo-glow ml-3 text-2xl font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg">Fake
+          News Detection</span>
+      </a>
+      <div class="flex items-center ml-auto md:ml-auto order-2 md:order-none">
+        <nav id="main-nav" class="hidden md:flex flex-wrap items-center text-base justify-center scroll-smooth">
+          <a href="#home"
+            class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Home</a>
+          <a href="#features"
+            class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Features</a>
+          <a href="#our-team"
+            class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Our
+            Team</a>
+          <a href="#testimonials"
+            class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Testimonials</a>
+          <a href="#contact"
+            class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Contact
+            Us</a>
+          <a href="#predict"
+            class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Predict
+            Now</a>
+        </nav>
+
+        <button id="hamburger"
+          class="md:hidden ml-4 p-2 rounded focus:outline-none bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 shadow-lg transition-transform duration-300"
+          aria-label="Open Menu">
+          <span class="block w-6 h-0.5 bg-white mb-1 rounded transition-all duration-300"></span>
+          <span class="block w-6 h-0.5 bg-white mb-1 rounded transition-all duration-300"></span>
+          <span class="block w-6 h-0.5 bg-white rounded transition-all duration-300"></span>
+        </button>
+      </div>
+
+      <div id="mobile-menu"
+        class="md:hidden fixed top-0 left-0 w-full h-full bg-gradient-to-br from-fuchsia-700 via-violet-900 to-black bg-opacity-95 z-50 flex flex-col items-center justify-center hidden transition-all duration-300">
+        <button id="close-menu"
+          class="absolute top-6 right-6 text-white text-3xl font-bold focus:outline-none">&times;</button>
+        <a href="#home"
+          class="text-2xl mb-6 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200 scroll-smooth">Home</a>
+        <a href="#features"
+          class="text-2xl mb-6 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200 scroll-smooth">Features</a>
+        <a href="#our-team"
+          class="text-2xl mb-6 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200 scroll-smooth">Our
+          Team</a>
+        <a href="#testimonials"
+          class="text-2xl mb-6 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200 scroll-smooth">Testimonials</a>
+        <a href="#contact"
+          class="text-2xl mb-6 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200 scroll-smooth">Contact
+          Us</a>
+        <a href="#predict"
+          class="text-2xl font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200 scroll-smooth">Predict
+          Now</a>
+      </div>
+    </div>
+  </header>
+  <div class="pt-24"></div>
+  <section id="home" class="text-black-600 body-font -my-8 bg-gradient-to-br from-fuchsia-700 via-violet-900 to-black" style="font-family: cursive">
+    <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+      <div
+        class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-200 dark:text-white">Fake News Detection
+          <br class="hidden lg:inline-block">Machine Learning Project
+        </h1>
+        <p class="mb-8 leading-relaxed text-gray-200 dark:text-gray-200">Fake news detection using machine learning is a
+          sophisticated process that
+          leverages advanced algorithms to automatically identify and classify news articles as real or fake. At its
+          core, this approach involves collecting a large dataset of news articles, each labeled as either true or
+          false. The text data is then preprocessed through techniques such as tokenization, stop-word removal,
+          stemming, and vectorization (e.g., TF-IDF or word embeddings) to convert raw text into numerical features
+        <div id="predict" class="flex w-full md:justify-start justify-center items-end">
+          <a href="/prediction"><button
+              class="px-6 py-3 bg-cyan-500 text-white font-semibold rounded-lg shadow-lg 
+          hover:bg-cyan-400 hover:shadow-cyan-400/70 transition duration-300 
+          animate-pulse">Try
+              It Now</button></a>
+        </div>
+      </div>
+      <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+        <img src="/static/Fake_News.png" alt="hero" class="object-cover object-center rounded">
+      </div>
+    </div>
+  </section>
+  
+  <section id="features" class="body-font -my-8 bg-gradient-to-br from-fuchsia-700 via-violet-900 to-black" style="font-family: cursive">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap">
+      <div class="flex flex-wrap -m-4">
+        <div class="p-4 lg:w-1/2 md:w-full">
+          <div class="flex rounded-lg p-8 sm:flex-row flex-col bg-white/20 backdrop-blur-md border border-white/30 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-cyan-400/40 hover:border-white/50">
+            <div
+              class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-600 flex-shrink-0">
+              <img src="/static/undraw_document-analysis_3c0y.svg" alt="">
+            </div>
+            <div class="flex-grow">
+              <h2 class="text-white text-lg title-font font-medium mb-3">Textual Features</h2>
+              <p class="leading-relaxed text-base text-gray-200">These include word frequency, n-grams, TF-IDF scores,
+                and linguistic
+                patterns that help identify the writing style and structure of news articles.</p>
+              <a href="https://www.sciencedirect.com/science/article/abs/pii/S187775032200014X"
+                class="mt-3 text-cyan-300 inline-flex items-center">Learn More
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 lg:w-1/2 md:w-full">
+          <div class="flex rounded-lg p-8 sm:flex-row flex-col bg-white/20 backdrop-blur-md border border-white/30 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-cyan-400/40 hover:border-white/50">
+            <div
+              class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-green-100 text-blue-600 flex-shrink-0">
+              <img src="/static/icons8-metadata-66.png" alt="">
+            </div>
+            <div class="flex-grow">
+              <h2 class="text-white text-lg title-font font-medium mb-3">Metadata Features</h2>
+              <p class="leading-relaxed text-base text-gray-200">Utilizes information such as publication date, author,
+                and
+                source credibility to provide additional context for classification..</p>
+              <a href="https://codilime.com/blog/the-crucial-role-of-machine-learning-metadata-and-its-influence-on-content-embeddings/"
+                class="mt-3 text-cyan-300 inline-flex items-center">Learn More
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr class="border-blue-500">
+  <section id="our-team"
+    class="text-gray-600 body-font -my-0 bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-600"
+    style="font-family: cursive">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="text-3xl font-extrabold title-font mb-4 text-gray-900 tracking-widest">OUR TEAM</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-200">Our team is a dynamic group of passionate
+          developers
+          dedicated to leveraging technology for social good. With diverse backgrounds in data science, software
+          engineering, and analytics, we collaborate to create innovative solutions for real-world challenges. Each
+          member brings unique expertise and creativity, fostering a culture of learning, problem-solving, and
+          continuous improvement. Together, we are committed to building reliable and impactful tools that empower users
+          and make a positive difference in the fight against misinformation.
+      </div>
+      <div class="flex flex-wrap -m-4">
+        <!-- Team Member 1 -->
+        <div class="p-4 lg:w-1/3 md:w-1/2 w-full">
+          <div class="h-full bg-white/20 backdrop-blur-md border border-white/30 shadow-lg rounded-lg p-6 flex flex-col items-center text-center transition-all duration-300 hover:scale-105 hover:shadow-purple-400/40">
+            <img alt="team" class="w-32 h-32 mb-4 object-cover object-center flex-shrink-0 rounded-full border-2 border-purple-300" src="/static/undraw_developer-activity_4zqd.svg">
+            <div class="w-full">
+              <h2 class="title-font font-medium text-lg text-gray-900">Mahammad Sadaqath Ali</h2>
+              <h3 class="text-gray-800 mb-3">Developer</h3>
+              <p class="mb-4 text-gray-200">Mahammad Sadaqath Ali is a dedicated developer with a strong passion for
+                building robust
+                and scalable applications. He excels at transforming complex ideas into practical solutions and is
+                always eager to explore new technologies. His attention to detail and commitment to quality ensure that
+                every project he works on meets the highest standards.</p>
+              <span class="inline-flex space-x-4 mt-4">
+                <a href="https://www.linkedin.com/in/mahammad-sadaqath-ali-84b371325" class="text-gray-700 hover:text-blue-600 transition-transform duration-300 hover:scale-125">
+                  <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+                <a href="https://github.com/mdsadaqathali5" class="text-gray-700 hover:text-gray-900 transition-transform duration-300 hover:scale-125">
+                  <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.942.359.308.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Team Member 2 -->
+        <div class="p-4 lg:w-1/3 md:w-1/2 w-full">
+          <div class="h-full bg-white/20 backdrop-blur-md border border-white/30 shadow-lg rounded-lg p-6 flex flex-col items-center text-center transition-all duration-300 hover:scale-105 hover:shadow-purple-400/40">
+            <img alt="team" class="w-32 h-32 mb-4 object-cover object-center flex-shrink-0 rounded-full border-2 border-purple-300" src="/static/undraw_web-developer_ggt0.svg">
+            <div class="w-full">
+              <h2 class="title-font font-medium text-lg text-gray-900">Abul Fazal Shaikh Mahmood</h2>
+              <h3 class="text-gray-800 mb-3">Developer</h3>
+              <p class="mb-4 text-gray-200">Abul Fazal Sheikh Mahmud brings a creative and analytical mindset to the
+                team. With a
+                background in data analysis and software development, he specializes in uncovering insights from data
+                and optimizing workflows. His collaborative spirit and problem-solving skills make him an invaluable
+                asset in tackling challenging tasks.</p>
+              <span class="inline-flex space-x-4 mt-4">
+                <a href="#" class="text-gray-700 hover:text-blue-600 transition-transform duration-300 hover:scale-125">
+                  <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-700 hover:text-gray-900 transition-transform duration-300 hover:scale-125">
+                  <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.942.359.308.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Team Member 3 -->
+        <div class="p-4 lg:w-1/3 md:w-1/2 w-full">
+          <div class="h-full bg-white/20 backdrop-blur-md border border-white/30 shadow-lg rounded-lg p-6 flex flex-col items-center text-center transition-all duration-300 hover:scale-105 hover:shadow-purple-400/40">
+            <img alt="team" class="w-32 h-32 mb-4 object-cover object-center flex-shrink-0 rounded-full border-2 border-purple-300" src="/static/undraw_developer-avatar_f6ac.svg">
+            <div class="w-full">
+              <h2 class="title-font font-medium text-lg text-gray-900">Md Fahad</h2>
+              <h3 class="text-gray-800 mb-3">Developer</h3>
+              <p class="mb-4 text-gray-200">Md Fahad is a versatile developer known for his adaptability and innovative
+                thinking. He
+                enjoys working on diverse projects and is skilled at bridging the gap between technical requirements and
+                user needs. His proactive approach and enthusiasm for learning drive the team forward and contribute to
+                the success of every initiative.</p>
+              <span class="inline-flex space-x-4 mt-4">
+                <a href="https://www.linkedin.com/in/md-fahad-71505a2b6" class="text-gray-700 hover:text-blue-600 transition-transform duration-300 hover:scale-125">
+                  <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+                <a href="https://github.com/Fahad035" class="text-gray-700 hover:text-gray-900 transition-transform duration-300 hover:scale-125">
+                  <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.942.359.308.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr class="border-blue-500">
+  <section id="testimonials"
+    class="text-gray-600 body-font -my-0 bg-gradient-to-r from-blue-500 via-purple-500 to-red-500"
+    style="font-family: cursive">
+    <div class="container px-5 py-24 mx-auto">
+      <h1 class="text-3xl font-extrabold title-font text-gray-900 mb-12 text-center" style="font-family: cursive">
+        Testimonials</h1>
+
+      <div class="flex flex-wrap -m-4 ">
+        <div class="p-4 md:w-1/2 w-full ">
+          <div class="h-full bg-gradient-to-r from-violet-900 via-purple-500 to-red-900 p-8 rounded text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-5 h-5 text-gray-200 mb-4"
+              viewBox="0 0 975.036 975.036">
+              <path
+                d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z">
+              </path>
+            </svg>Machine learning has empowered our organization to make smarter, faster decisions by accurately
+            forecasting trends and outcomes. The ability to process and learn from massive datasets has not only
+            improved our efficiency but also given us a competitive edge in the market. Predictive models have become an
+            essential part of our daily operations, helping us minimize risks and maximize opportunities.</p>
+            <br>
+            <a class="inline-flex items-center">
+              <img alt="testimonial" src="https://randomuser.me/api/portraits/women/44.jpg"
+                class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+              <span class="flex-grow flex flex-col pl-4">
+                <span class="title-font font-bold text-gray-900">Sarah Thompson</span>
+                <span class="text-gray-900 text-sm">Data Scientist</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="p-4 md:w-1/2 w-full">
+          <div class="h-full bg-gradient-to-r from-violet-900 via-purple-500 to-red-900 p-8 rounded text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-5 h-5 text-gray-200 mb-4"
+              viewBox="0 0 975.036 975.036">
+              <path
+                d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z">
+              </path>
+            </svg>
+            <p class="leading-relaxed mb-6">Integrating machine learning into our prediction systems has transformed the
+              way we approach problem-solving. These intelligent algorithms adapt to new information and continuously
+              refine their predictions, allowing us to stay ahead in a rapidly changing environment. The insights gained
+              from machine learning have been invaluable in driving innovation and achieving our business goals.</p>
+            <a class="inline-flex items-center">
+              <img alt="testimonial" src="https://randomuser.me/api/portraits/men/32.jpg"
+                class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+              <span class="flex-grow flex flex-col pl-4">
+                <span class="title-font font-bold text-gray-900">Dr. Michael Lee</span>
+                <span class="text-gray-900 text-sm">Business Analyst</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer id="contact" class="text-gray-200 body-font -my-8" style="font-family: cursive">
+    <div class="w-full px-0 py-16 bg-gradient-to-r from-black to-purple-900 ">
+      <div class="flex flex-wrap flex-col md:flex-row md:text-left text-center order-first">
+        <div class="w-full sm:w-1/2 md:w-1/4 px-12 mb-8 md:mb-0">
+          <h2 class="title-font font-medium text-gray-200 tracking-widest text-sm mb-3">CATEGORIES</h2>
+          <nav class="list-none mb-10">
+            <li>
+              <a class="text-gray-200 hover:text-blue-500"
+                href="https://www.bbc.com/news/topics/cjxv13v27dyt">Politics</a>
+            </li>
+            <li>
+              <a class="text-gray-200 hover:text-blue-500" href="https://indianexpress.com/section/sports/">Sports</a>
+            </li>
+            <li>
+              <a class="text-gray-200 hover:text-blue-500" href="https://boldscience.org/technology/">Technology</a>
+            </li>
+            <li>
+              <a class="text-gray-200 hover:text-blue-500" href="https://unlimithealth.org/news/">Health</a>
+            </li>
+          </nav>
+        </div>
+        <div class="w-full sm:w-1/2 md:w-1/4 px-0 mb-8 md:mb-0">
+          <h2 class="title-font font-medium text-gray-200 tracking-widest text-sm mb-3">DID YOU KNOW?</h2>
+          <div class="list-none mb-10">
+            <p id="fact-of-the-day" class="text-gray-200 text-sm">Loading a fun fact...</p>
+          </div>
+        </div>
+        <div class="w-full sm:w-1/2 md:w-1/4 px-4 mb-8 md:mb-0">
+          <h2 class="title-font font-medium text-gray-200 tracking-widest text-sm mb-3">CATEGORIES</h2>
+          <nav class="list-none mb-10">
+            <li>
+              <a class="text-gray-200 hover:text-blue-500"
+                href="https://www.bbc.com/culture/entertainment-news">Entertainment</a>
+            </li>
+            <li>
+              <a class="text-gray-200 hover:text-blue-500" href="https://www.snexplores.org/">Science</a>
+            </li>
+            <li>
+              <a class="text-gray-200 hover:text-blue-500" href="https://www.cnbc.com/world/">Business</a>
+            </li>
+            <li>
+              <a class="text-gray-200 hover:text-blue-500" href="https://www.bbc.com/news/world">World News</a>
+            </li>
+          </nav>
+        </div>
+        
+        <div class="w-full md:w-1/4 px-4">
+          <h2 class="title-font font-medium text-gray-100 tracking-widest text-sm mb-3">CONTACT US</h2>
+          <form id="contact-form" class="bg-gray-800 p-4 rounded-lg shadow-md" action="https://formspree.io/f/xandllbq"
+            method="POST">
+            <div class="mb-3">
+              <input type="text" name="name" placeholder="Name"
+                class="w-full px-3 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-400">
+            </div>
+            <div class="mb-3">
+              <input type="email" name="email" placeholder="Email"
+                class="w-full px-3 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-400">
+            </div>
+            <div class="mb-3">
+              <input type="tel" name="phone" placeholder="Phone"
+                class="w-full px-3 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-400">
+            </div>
+            <div class="mb-3">
+              <textarea name="message" placeholder="Message" rows="3"
+                class="w-full px-3 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-400"></textarea>
+            </div>
+            <button type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition">Send</button>
+          </form>
+        </div>
+
+
+      </div>
+    </div>
+    <hr class="border-blue-500">
+    <div class="bg-gradient-to-r from-black to-purple-900">
+      <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+        <a href="#home" class="flex title-font font-medium items-center md:justify-start justify-center">
+          <span
+            class="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 rounded-full shadow-lg">
+            <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="shieldGradient" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#34d399" />
+                  <stop offset="0.5" stop-color="#3b82f6" />
+                  <stop offset="1" stop-color="#a78bfa" />
+                </linearGradient>
+              </defs>
+              <path d="M24 4L8 10v10c0 12 8 20 16 24 8-4 16-12 16-24V10L24 4z" fill="url(#shieldGradient)" />
+              <path d="M18 25l5 5 7-9" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span
+            class="logo-glow ml-3 text-2xl font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg">Fake
+            News Detection</span>
+        </a>
+        <p class="text-sm text-gray-200 sm:ml-6 sm:mt-0 mt-4">© 2025 Fake News Detection —
+          <a href="https://developers.google.com/machine-learning" rel="noopener noreferrer" class="text-gray-200 ml-1"
+            target="_blank">@machinelearning</a>
+        </p>
+        <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+          <a class="ml-3 text-gray-300 hover:text-gray-400 transition-transform hover:scale-125"
+            href="https://x.com/MdFahad1362761">
+            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+              viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+              </path>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/fakenewsdetecor090/" class="ml-3 text-pink-500 hover:text-pink-700 transition-transform hover:scale-125">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              class="w-5 h-5" viewBox="0 0 24 24">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-blue-800 hover:text-blue-500 transition-transform hover:scale-125"
+            href="https://www.linkedin.com/in/md-fahad-71505a2b6">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+              <path stroke="none"
+                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+              <circle cx="4" cy="4" r="2" stroke="none"></circle>
+            </svg>
+          </a>
+        </span>
+      </div>
+    </div>
+    <style>
+      @media (max-width: 640px) {
+        .container {
+          padding-left: 1rem !important;
+          padding-right: 1rem !important;
+        }
+      }
+    </style>
+  </footer>
+  <script>
+
+    // --- WAIT FOR DOM TO BE FULLY LOADED ---
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mobile menu
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const closeMenu = document.getElementById('close-menu');
+      if (hamburger && mobileMenu && closeMenu) {
+        hamburger.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+        closeMenu.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+      }
+
+      // Fact of the day
+      const facts = [
+        "False news stories are 70% more likely to be retweeted on Twitter than true stories.",
+        "The term 'fake news' became widely used after the 2016 U.S. presidential election.",
+        "Confirmation bias makes people more likely to believe information that confirms their existing beliefs.",
+        "Bots and troll farms are often used to amplify the spread of misinformation online.",
+        "Fact-checking websites like Snopes, PolitiFact, and FactCheck.org are valuable resources for verifying information.",
+        "The first newspaper was published in 1605.",
+        "Over 60% of adults get news from social media.",
+        "Fake news spreads 6 times faster than real news.",
+        "Google processes over 3.5 billion searches per day.",
+        "The word 'news' comes from 'North, East, West, South'."
+      ];
+      const factElement = document.getElementById('fact-of-the-day');
+      if (factElement) {
+        const randomFact = facts[Math.floor(Math.random() * facts.length)];
+        factElement.textContent = randomFact;
+      }
+
+      // Subscribe form (currently commented out in HTML)
+      const subscribeForm = document.getElementById('subscribe-form-container');
+      if (subscribeForm) {
+        subscribeForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          subscribeForm.innerHTML = `<p class="text-blue-600 font-medium text-center md:text-left">Thank you for subscribing!</p>`;
+        });
+      }
+
+      window.addEventListener("scroll", () => {
+        let sections = document.querySelectorAll("section");
+        let navLinks = document.querySelectorAll(".nav-link");
+
+        sections.forEach(sec => {
+          let top = window.scrollY;
+          let offset = sec.offsetTop - 100;
+          let height = sec.offsetHeight;
+          let id = sec.getAttribute("id");
+
+          if (top >= offset && top < offset + height) {
+            navLinks.forEach(link => {
+              link.classList.remove("active");
+              document.querySelector(`.nav-link[href*=${id}]`).classList.add("active");
+            });
+          }
+        });
+      });
+
+      // Contact form
+      const contactForm = document.getElementById("contact-form");
+      if (contactForm) {
+        contactForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const data = new FormData(contactForm);
+          try {
+            const response = await fetch(contactForm.action, {
+              method: contactForm.method,
+              body: data,
+              headers: { 'Accept': 'application/json' }
+            });
+            if (response.ok) {
+              alert("✅ Message sent successfully!");
+              contactForm.reset();
+            } else {
+              alert("❌ Oops! Something went wrong.");
+            }
+          } catch (error) {
+            console.error("Error submitting form:", error);
+            alert("❌ Oops! Something went wrong.");
+          }
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

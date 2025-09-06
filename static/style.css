@@ -1,0 +1,125 @@
+.pixel-btn {
+  /* Base styles */
+  background: linear-gradient(45deg, #052952, #440926);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 8px;
+
+  border: 2px solid #000;
+  cursor: pointer;
+  position: relative;
+
+  box-shadow: 4px 4px 0 #000;
+
+
+  transition: all 0.15s ease-out;
+}
+
+.pixel-btn:hover {
+  background: linear-gradient(-45deg, #63006c, #052952);
+
+}
+
+.pixel-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.pixel-btn:active {
+  box-shadow: none;
+  transform: translate(4px, 4px);
+}
+
+@property --deg {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.pixel-btn::before,
+.pixel-btn::after {
+  content: "";
+  position: absolute;
+  background: conic-gradient(from var(--deg) at center,
+      #00c3ff,
+      #4d0199,
+      #6300c6,
+      #0096cd);
+  border-radius: inherit;
+  z-index: -2;
+  inset: -2px;
+  animation: autoRotate 2s linear infinite;
+}
+
+.pixel-btn::after {
+  z-index: -1;
+  filter: blur(5px);
+}
+
+@keyframes autoRotate {
+  to {
+    --deg: 360deg;
+  }
+}
+
+/* sm:text-3xl text-2xl font-medium title-font mb-4 text-blue-300 */
+
+.typewriter {
+  font-family: monospace;
+  font-size: 1.875rem;
+  font-weight: bolder;
+  margin-inline: auto;
+  margin-bottom: 0.5rem; 
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: typing 6s steps(22, end) infinite;
+  background: linear-gradient(90deg, #00c3ff, #9f52ff, #ff007f);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 0 0 5px rgba(0, 195, 255, 0.4), 0 0 10px rgba(159, 82, 255, 0.4);
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+
+  40%,
+  60% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0;
+  }
+}
+
+.neon-hr {
+  border: 0;
+  height: 2px;
+  background: #0CF;
+  box-shadow: 0 0 5px #0CF,
+    0 0 10px #0CF,
+    0 0 20px #0CF,
+    0 0 30px #0CF;
+  animation: neon-glow 3s ease-in-out infinite;
+}
+
+@keyframes neon-glow {
+  0%,
+  100% {
+    background: #0CF;
+    box-shadow: 0 0 5px #0CF, 0 0 10px #0CF, 0 0 20px #0CF, 0 0 30px #0CF;
+  }
+  50% {
+    background: #F0F;
+    box-shadow: 0 0 5px #F0F, 0 0 10px #F0F, 0 0 20px #F0F, 0 0 30px #F0F;
+  }
+}
+.logo-glow {
+  text-shadow: 0 0 8px rgba(52, 211, 153, 0.7), 0 0 15px rgba(59, 130, 246, 0.5), 0 0 20px rgba(167, 139, 250, 0.4);
+}

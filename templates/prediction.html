@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fake News Detector</title>
+  <link rel="icon" type="/static/png" href="/static/fake_concept.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+  <header class="fixed top-0 left-0 w-full z-50 text-blue-200 body-font bg-gradient-to-r from-black to-purple-900">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-blue-200 mb-4 md:mb-0">
+        <span
+          class="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 rounded-full shadow-lg">
+          <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="shieldGradient" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#34d399" />
+                <stop offset="0.5" stop-color="#3b82f6" />
+                <stop offset="1" stop-color="#a78bfa" />
+              </linearGradient>
+            </defs>
+            <path d="M24 4L8 10v10c0 12 8 20 16 24 8-4 16-12 16-24V10L24 4z" fill="url(#shieldGradient)" />
+            <path d="M18 25l5 5 7-9" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span
+          class="logo-glow ml-3 text-2xl font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg">Fake
+          News Detection</span>
+      </a>
+      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <a href="/" class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Home</a>
+        <a href="/#our-team" class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">About us</a>
+        <a href="https://news.google.com/home?hl=en-IN&gl=IN&ceid=IN:en" class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">News</a>
+        <a href="/prediction" class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Prediction</a>
+      </nav>
+    </div>
+  </header>
+  <!-- <div class="pt-24"></div> -->
+  <section class="text-blue-300 body-font bg-gradient-to-b from-purple-900 to-black" style="font-family: cursive;">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h2 class="text-xl text-gray-200 font-extrabold tracking-widest font-medium title-font mb-1" style="font-family: cursive;">Machine Learning Project
+        </h2>
+        <h1 class="font-extrabold text-3xl bg-gradient-to-r from-blue-400 via-purple-500 to-red-500 bg-clip-text text-transparent animate-pulse">Fake News Detection</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-200">To check a news story, simply paste the headline
+          or a key sentence from the article into the text box below and click 'Analyze'. Our machine learning
+          model will analyze the text and provide a prediction on whether it is likely to be real or fake
+          news. This tool is designed to be a first line of defense, helping you to think critically about the
+          content you consume online.
+        </p>
+        <br>
+      </div>
+      <div class="center">
+        <form action="/prediction" method="POST" class="w-full">
+          <div class="mb-4 w-full">
+            <label for="news" class="block mb-2 text-lg font-medium text-blue-200">Enter News Headline or Text</label>
+            <textarea id="news" name="news" rows="5" class="block p-4 w-full text-lg text-blue-100 bg-black bg-opacity-50 rounded-lg border border-gray-600 focus:ring-blue-500 focus:border-blue-500" placeholder="Paste the news headline or article text here...">{{ request.form.news if request.form.news else '' }}</textarea>
+          </div>
+          <button type="submit" class="pixel-btn">Analyze</button>
+            <input type="hidden" name="scroll" value="results">
+        </form>
+        {% if prediction_text or grammar_feedback or credibility_feedback or abuse_feedback %}
+        <div class="mt-8">
+  <a id="results"></a>
+          {% if prediction_text %}
+            {% set color_class = 'bg-gradient-to-r from-blue-400 via-purple-500 to-red-500 bg-clip-text text-transparent' %}
+            {% if 'real' in prediction_text|lower %}
+              {% set color_class = 'text-green-400' %}
+            {% elif 'fake' in prediction_text|lower %}
+              {% set color_class = 'text-red-500' %}
+            {% endif %}
+            <p class="text-3xl font-extrabold mb-8 text-center drop-shadow-lg {{ color_class }}">{{prediction_text}}</p>
+          {% endif %}
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="rounded-2xl shadow-2xl bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 p-8 text-white transform transition-transform duration-300 hover:scale-105 hover:shadow-blue-400/60 cursor-pointer border-2 border-blue-400/30">
+              <h3 class="font-extrabold text-xl mb-3 tracking-wide flex items-center gap-2">
+                <!-- Text Accuracy Logo: Spellcheck/Document -->
+                <svg class="w-7 h-7 text-blue-200 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 11h4M8 15h8M8 7h8"/><path d="M16 11l2 2 4-4" stroke="#38bdf8" stroke-width="2"/></svg>
+                Text Accuracy
+              </h3>
+              <p class="text-blue-100 text-lg">{{ grammar_feedback }}</p>
+            </div>
+            <div class="rounded-2xl shadow-2xl bg-gradient-to-br from-green-900 via-green-700 to-green-500 p-8 text-white transform transition-transform duration-300 hover:scale-105 hover:shadow-green-400/60 cursor-pointer border-2 border-green-400/30">
+              <h3 class="font-extrabold text-xl mb-3 tracking-wide flex items-center gap-2">
+                <!-- Credibility Logo: Shield/Checkmark -->
+                <svg class="w-7 h-7 text-green-200 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5.25-3.5 10-7 12-3.5-2-7-6.75-7-12V6l7-4z"/><path d="M9 12l2 2 4-4" stroke="#4ade80" stroke-width="2"/></svg>
+                Credibility
+              </h3>
+              <p class="text-green-100 text-lg">{{ credibility_feedback }}</p>
+            </div>
+            <div class="rounded-2xl shadow-2xl bg-gradient-to-br from-red-900 via-pink-700 to-pink-500 p-8 text-white transform transition-transform duration-300 hover:scale-105 hover:shadow-pink-400/60 cursor-pointer border-2 border-pink-400/30">
+              <h3 class="font-extrabold text-xl mb-3 tracking-wide flex items-center gap-2">
+                <!-- Toxicity Logo: Warning/Toxic -->
+                <svg class="w-7 h-7 text-pink-200 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 15h8M9 9h.01M15 9h.01" stroke="#f472b6" stroke-width="2"/></svg>
+                Toxicity
+              </h3>
+              <p class="text-pink-100 text-lg">{{ abuse_feedback }}</p>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+  <hr class="neon-hr">
+  <footer class="bg-gradient-to-r from-black to-purple-900">
+    <div>
+      <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+        <a class="flex title-font font-medium items-center md:justify-start justify-center text-blue-200">
+          <span
+            class="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 rounded-full shadow-lg">
+            <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="shieldGradient" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#34d399" />
+                  <stop offset="0.5" stop-color="#3b82f6" />
+                  <stop offset="1" stop-color="#a78bfa" />
+                </linearGradient>
+              </defs>
+              <path d="M24 4L8 10v10c0 12 8 20 16 24 8-4 16-12 16-24V10L24 4z" fill="url(#shieldGradient)" />
+              <path d="M18 25l5 5 7-9" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span
+            class="logo-glow ml-3 text-2xl font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg">Fake
+            News Detection</span>
+        </a>
+        <p class="text-sm text-blue-300 sm:ml-6 sm:mt-0 mt-4">© 2025 Fake News Detection —
+          <a href="https://developers.google.com/machine-learning" rel="noopener noreferrer" class="text-blue-200 ml-1"
+            target="_blank">@machinelearning</a>
+        </p>
+        <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+          <a class="ml-3 text-blue-300 hover:text-green-300 transition-transform hover:scale-125"
+            href="https://x.com/MdFahad1362761">
+            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+              viewBox="0 0 24 24">
+              <path
+                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+              </path>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/fakenewsdetecor090/" class="ml-3 text-blue-300 hover:text-green-300 transition-transform hover:scale-125">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              class="w-5 h-5" viewBox="0 0 24 24">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-blue-300 hover:text-green-300 transition-transform hover:scale-125"
+            href="https://www.linkedin.com/in/md-fahad-71505a2b6">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+              <path stroke="none"
+                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+              <circle cx="4" cy="4" r="2" stroke="none"></circle>
+            </svg>
+          </a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+<script>
+  // If the results anchor exists, scroll to it after page load
+  window.addEventListener('DOMContentLoaded', function() {
+    if (window.location.pathname.endsWith('/prediction')) {
+      var results = document.getElementById('results');
+      if (results) {
+        results.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  });
+</script>
+</body>
+
+</html>

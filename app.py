@@ -10,7 +10,7 @@ vector = pickle.load(open("vectorizer.pk1", 'rb'))
 model = pickle.load(open("finalized_model.pk1", 'rb'))
 
 
-tool = language_tool_python.LanguageTool('en-US')
+tool = language_tool_python.LanguageToolPublicAPI('en-US')
 profanity.load_censor_words()
 # Pre-warm language tool to reduce first-request delay
 _ = tool.check("This is a warmup sentence.")

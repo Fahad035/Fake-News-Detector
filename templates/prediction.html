@@ -33,18 +33,52 @@
           News Detection</span>
       </a>
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-        <a href="/" class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Home</a>
-        <a href="/#our-team" class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">About us</a>
-        <a href="https://news.google.com/home?hl=en-IN&gl=IN&ceid=IN:en" class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">News</a>
-        <a href="/prediction" class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Prediction</a>
+      <div class="flex items-center ml-auto md:ml-auto order-2 md:order-none">
+        <nav id="main-nav" class="hidden md:flex flex-wrap items-center text-base justify-center scroll-smooth">
+          <a href="/"
+            class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Home</a>
+          <a href="/#our-team"
+            class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Our
+            Team</a>
+          <a href="https://news.google.com/home?hl=en-IN&gl=IN&ceid=IN:en"
+            class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">News</a>
+          <a href="/prediction"
+            class="mr-5 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200">Predict
+            Now</a>
+        </nav>
+
+        <button id="hamburger"
+          class="md:hidden ml-4 p-2 rounded focus:outline-none bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 shadow-lg transition-transform duration-300"
+          aria-label="Open Menu">
+          <span class="block w-6 h-0.5 bg-white mb-1 rounded transition-all duration-300"></span>
+          <span class="block w-6 h-0.5 bg-white mb-1 rounded transition-all duration-300"></span>
+          <span class="block w-6 h-0.5 bg-white rounded transition-all duration-300"></span>
+        </button>
+      </div>
+
+      <div id="mobile-menu"
+        class="md:hidden fixed top-0 left-0 w-full h-full bg-gradient-to-br from-fuchsia-700 via-violet-900 to-black bg-opacity-95 z-50 flex flex-col items-center justify-center hidden transition-all duration-300">
+        <button id="close-menu"
+          class="absolute top-6 right-6 text-white text-3xl font-bold focus:outline-none">&times;</button>
+        <a href="/"
+          class="text-2xl mb-6 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200 scroll-smooth">Home</a>
+        <a href="/#our-team"
+          class="text-2xl mb-6 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200 scroll-smooth">Our
+          Team</a>
+        <a href="https://news.google.com/home?hl=en-IN&gl=IN&ceid=IN:en"
+          class="text-2xl mb-6 font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200 scroll-smooth">News</a>
+        <a href="/prediction"
+          class="text-2xl font-extrabold bg-gradient-to-tr from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-wide drop-shadow-lg hover:text-cyan-400 transition-colors duration-200 scroll-smooth">Predict
+          Now</a>
+      </div>
       </nav>
     </div>
   </header>
   <!-- <div class="pt-24"></div> -->
-  <section class="text-blue-300 body-font bg-gradient-to-b from-purple-900 to-black" style="font-family: cursive;">
+  <section class="text-blue-300 body-font bg-gradient-to-b from-purple-900 to-black" style="font-family: Arial, Helvetica, sans-serif">
     <div class="container px-5 py-24 mx-auto">
       <div class="flex flex-col text-center w-full mb-20">
-        <h2 class="text-xl text-gray-200 font-extrabold tracking-widest font-medium title-font mb-1" style="font-family: cursive;">Machine Learning Project
+        <h2 class="text-xl text-gray-200 font-extrabold tracking-widest font-medium title-font mb-1" style="font-family: Arial, Helvetica, sans-serif">Machine Learning Project
         </h2>
         <h1 class="font-extrabold text-3xl bg-gradient-to-r from-blue-400 via-purple-500 to-red-500 bg-clip-text text-transparent animate-pulse">Fake News Detection</h1>
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-200">To check a news story, simply paste the headline
@@ -80,7 +114,7 @@
             <div class="rounded-2xl shadow-2xl bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 p-8 text-white transform transition-transform duration-300 hover:scale-105 hover:shadow-blue-400/60 cursor-pointer border-2 border-blue-400/30">
               <h3 class="font-extrabold text-xl mb-3 tracking-wide flex items-center gap-2">
                 <!-- Text Accuracy Logo: Spellcheck/Document -->
-                <svg class="w-7 h-7 text-blue-200 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 11h4M8 15h8M8 7h8"/><path d="M16 11l2 2 4-4" stroke="#38bdf8" stroke-width="2"/></svg>
+                <svg class="w-7 h-7 text-blue-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 11h4M8 15h8M8 7h8"/><path d="M16 11l2 2 4-4" stroke="#38bdf8" stroke-width="2"/></svg>
                 Text Accuracy
               </h3>
               <p class="text-blue-100 text-lg">{{ grammar_feedback }}</p>
@@ -88,7 +122,7 @@
             <div class="rounded-2xl shadow-2xl bg-gradient-to-br from-green-900 via-green-700 to-green-500 p-8 text-white transform transition-transform duration-300 hover:scale-105 hover:shadow-green-400/60 cursor-pointer border-2 border-green-400/30">
               <h3 class="font-extrabold text-xl mb-3 tracking-wide flex items-center gap-2">
                 <!-- Credibility Logo: Shield/Checkmark -->
-                <svg class="w-7 h-7 text-green-200 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5.25-3.5 10-7 12-3.5-2-7-6.75-7-12V6l7-4z"/><path d="M9 12l2 2 4-4" stroke="#4ade80" stroke-width="2"/></svg>
+                <svg class="w-7 h-7 text-green-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5.25-3.5 10-7 12-3.5-2-7-6.75-7-12V6l7-4z"/><path d="M9 12l2 2 4-4" stroke="#4ade80" stroke-width="2"/></svg>
                 Credibility
               </h3>
               <p class="text-green-100 text-lg">{{ credibility_feedback }}</p>
@@ -96,7 +130,7 @@
             <div class="rounded-2xl shadow-2xl bg-gradient-to-br from-red-900 via-pink-700 to-pink-500 p-8 text-white transform transition-transform duration-300 hover:scale-105 hover:shadow-pink-400/60 cursor-pointer border-2 border-pink-400/30">
               <h3 class="font-extrabold text-xl mb-3 tracking-wide flex items-center gap-2">
                 <!-- Toxicity Logo: Warning/Toxic -->
-                <svg class="w-7 h-7 text-pink-200 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 15h8M9 9h.01M15 9h.01" stroke="#f472b6" stroke-width="2"/></svg>
+                <svg class="w-7 h-7 text-pink-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 15h8M9 9h.01M15 9h.01" stroke="#f472b6" stroke-width="2"/></svg>
                 Toxicity
               </h3>
               <p class="text-pink-100 text-lg">{{ abuse_feedback }}</p>
@@ -176,6 +210,24 @@
       }
     }
   });
+</script>
+<script>
+
+  // --- WAIT FOR DOM TO BE FULLY LOADED ---
+  document.addEventListener('DOMContentLoaded', () => {
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenu = document.getElementById('close-menu');
+    if (hamburger && mobileMenu && closeMenu) {
+      hamburger.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+      closeMenu.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+      });
+    }
+  })
+
 </script>
 </body>
 

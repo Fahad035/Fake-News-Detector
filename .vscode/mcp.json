@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "Fake-News-Detector Docs": {
+      "type": "sse",
+      "url": "https://gitmcp.io/Fahad035/Fake-News-Detector"
+    }
+  }
+}

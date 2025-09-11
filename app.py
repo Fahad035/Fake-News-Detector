@@ -12,7 +12,7 @@ model = pickle.load(open("finalized_model.pk1", 'rb'))
 
 tool = language_tool_python.LanguageToolPublicAPI('en-US')
 profanity.load_censor_words()
-# Pre-warm language tool to reduce first-request delay
+
 _ = tool.check("This is a warmup sentence.")
 
 app = Flask(__name__)
@@ -27,18 +27,15 @@ def prediction():
         news = str(request.form['news'])
         print(news)
 
-        # Fake news prediction
         predict = model.predict(vector.transform([news]))[0]
         print(predict)
 
-        # Grammar/Correctness check
         matches = tool.check(news)
         grammar_issues = len(matches)
         grammar_feedback = "No major issues found." if grammar_issues == 0 else f"{grammar_issues} issue(s) detected."
 
-        # Credibility check using Google Fact Check Tools API
         api_url = "https://factchecktools.googleapis.com/v1alpha1/claims:search"
-        api_key = "AIzaSyB-nGz-8a1I5l5Mi6scApdFh9X2b4UGjxc"  # Replace with your API key
+        api_key = "AIzaSyB-nGz-8a1I5l5Mi6scApdFh9X2b4UGjxc"
         credibility_feedback = "No real-time fact-check found."
         try:
             params = {
@@ -70,7 +67,6 @@ def prediction():
         except Exception as e:
             credibility_feedback = "Fact check unavailable."
 
-        # Abuse detection
         is_abusive = profanity.contains_profanity(news)
         abuse_feedback = "Abusive language detected!" if is_abusive else "No abusive language detected."
 

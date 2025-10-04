@@ -5,9 +5,10 @@ import pickle
 import language_tool_python
 from better_profanity import profanity
 import requests
+import os
 
-vector = pickle.load(open("vectorizer.pk1", 'rb'))
-model = pickle.load(open("finalized_model.pk1", 'rb'))
+vector = pickle.load(open("vectorizer.pkl", 'rb'))
+model = pickle.load(open("finalized_model.pkl", 'rb'))
 
 
 tool = language_tool_python.LanguageToolPublicAPI('en-US')
@@ -35,8 +36,11 @@ def prediction():
         grammar_feedback = "No major issues found." if grammar_issues == 0 else f"{grammar_issues} issue(s) detected."
 
         api_url = "https://factchecktools.googleapis.com/v1alpha1/claims:search"
-        api_key = "AIzaSyB-nGz-8a1I5l5Mi6scApdFh9X2b4UGjxc"
-        credibility_feedback = "No real-time fact-check found."
+        # api_key = "AIzaSyB-nGz-8a1I5l5Mi6scApdFh9X2b4UGjxc"
+        # credibility_feedback = "No real-time fact-check found."
+        api_key = os.environ.get('GOOGLE_FACT_CHECK_API_KEY')
+        if not api_key:
+            credibility_feedback = "Fact check unavailable - API key missing"
         try:
             params = {
                 "query": news,
